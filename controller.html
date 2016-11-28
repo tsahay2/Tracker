@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+  <h3>Tracker System</h3>
+  <ul class="nav nav-tabs" id="nav">
+        <li class="active"><a href="http://localhost/Tracker/bootstrap-datatable-php/bootstrap-fileinput-master/examples/datatable.html">Home</a></li>
+
+    <li ><a href="http://localhost/Tracker/bootstrap-datatable-php/bootstrap-fileinput-master/examples/index1.html">Upload</a></li>
+    <li><a href="http://localhost/Tracker/bootstrap-datatable-php/bootstrap-fileinput-master/examples/datatable.html">View</a></li>
+   
+  </ul>
+  <br>
+ 
+</div>
+
+<div id="ajax-content"><p>This is default text, which will be replaced</p></div>
+<script>
+$(document).ready(function() {
+    $("#nav li a").click(function() {
+ 
+        $("#ajax-content").empty().append("<div id='loading'><img src='images/loading.gif' alt='Loading' /></div>");
+        $("#nav li a").removeClass('current');
+        $(this).addClass('current');
+ 
+        $.ajax({ url: this.href, success: function(html) { 
+            $("#ajax-content").empty().append(html);
+            }
+    });
+    return false;
+    });
+ $("#ajax-content").empty().append("<div id='loading'><img src='images/loading.gif' alt='Loading' /></div>");
+    $.ajax({ url: 'http://localhost/Tracker/bootstrap-datatable-php/bootstrap-fileinput-master/examples/datatable.html', success: function(html) {
+            $("#ajax-content").empty().append(html);
+    }
+    });
+
+});
+
+</script>
+</body>
+</html>

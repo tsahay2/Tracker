@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>*/
+
+	<script type="text/javascript" language="javascript" class="init"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"></script>
+
+
+<body class="dt-example">
+	<button id="button" >Click to delete</button>
+	<table id="example" class="display" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>BDM</th>
+				<th>AE APO NO</th>
+				<th>CUST NO</th>
+				<th>CUST NAME</th>
+				<th>BRAND</th>
+				<th>PNC NO</th>
+				<th>MODEL</th>
+				<th>REQ QTY</th>
+				<th>PG DESC</th>
+				<th>PG CODE</th>
+				<th>COUNTRY</th>
+				<th>MONTH DELIV.</th>
+				<th>SU</th>
+				<th>CSS TEAM</th>
+				<th>SO ORDER NO</th>
+				<th>DIRECT/CONS</th>
+				<th>PO NOs.</th>
+				<th>ORDER DATE</th>
+				<th>REQ DELIVERY DATE</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+
+
+<script>
+
+
+
+
+	$(document).ready(function() {
+		$('#example').dataTable( {
+			"aProcessing": true,
+			"aServerSide": true,
+			"ajax": "server-response.php",
+			"rowId": 'id'
+		} );
+	
+
+});
+
+// get version no of datatable
+/*$(document).ready(function(){
+    $('#myTable').DataTable();
+
+    var versionNo = $.fn.dataTable.version;
+    alert(versionNo);
+});*/
+
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+ 
+    $('#example').on( 'click', 'tr', function () {
+    	
+
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+ 
+      $('#button').click( function () {
+      
+      var table = $('#example').DataTable();
+
+
+ 		 // Get the rows id value
+  var id = table.api().row( this );
+  // Filter for only numbers
+ /* var id = id1.id();
+  id = id.replace(/\D/g, '');  
+  // Transform to numeric value
+  id = parseInt(id, 10);*/
+  alert( 'Clicked row id '+id.id() );
+
+
+     $.ajax({
+       url: "server-response.php", 
+       success : function(data){
+          //delete the row
+
+          table.row('.selected').remove().draw( false );
+        },
+       error: function(xhr){
+           //error handling
+        }}); 
+
+    } );
+} );
+</script>
+
+</html>
