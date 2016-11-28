@@ -77,7 +77,7 @@ $whole_row = array();?>
     <?php
 
 
-for ($row = 1; $row <= 5; ++$row) {
+for ($row = 1; $row <= $highestRow; ++$row) {
 /*    echo '<tr>';/* . PHP_EOL;*/
     for ($col = 0; $col <= 20; ++$col) {
       /*  echo '<td>' . 
